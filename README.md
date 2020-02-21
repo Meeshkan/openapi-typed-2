@@ -1,6 +1,6 @@
 # OpenAPI typed
 
-[![github](https://github.com/Meeshkan/openapi-typed-2/workflows/Python%20build/badge.svg)](https://github.com/Meeshkan/openapi-typed-2/actions)
+[![CircleCI](https://circleci.com/gh/Meeshkan/openapi-typed-2.svg?style=svg)](https://circleci.com/gh/Meeshkan/openapi-typed-2)
 [![PyPI](https://img.shields.io/pypi/dm/openapi-typed-2.svg)](https://pypi.org/project/openapi-typed-2/)
 [![PyPi](https://img.shields.io/pypi/pyversions/openapi-typed-2)](https://pypi.org/project/openapi-typed-2/)
 [![License](https://img.shields.io/pypi/l/openapi-typed-2)](LICENSE)
