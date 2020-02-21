@@ -21,6 +21,9 @@ jobs:
       - name: Run type-checks
         run: |
           mypy openapi_typed
+      - name: Code gen
+        run: /
+          python gen.py
       - name: Run tests
         run: |
           pytest
