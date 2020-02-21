@@ -36,14 +36,17 @@ def _omsu_r(n: str, q: str, K: str, tp: str):
         for k, v in d['{}'].items():
             if type(k) != str:
                 raise ValueError('{} in {} can only have string keys, but encountered %s.' % k)
+            e: Exception = ValueError('')
             try:
                 _ret[k] = convert_to_Reference(v)
             except:
                 try:
                     _ret[k] = convert_to_{}(v)
-                except: pass
+                except Exception as ee:
+                    e = ee
             if k not in _ret:
-                raise ValueError('{} in {} at key %s has a value %s which cannot be cast to Union[{}, Reference].' % (k, str(v)))
+                #raise ValueError('%s\\n{} in {} at key %s has a value %s which cannot be cast to Union[{}, Reference].' % (str(e), k, str(v)))
+                raise e
         {} = cast(Mapping[str, Union[{}, Reference]], _ret)
 '''.format(n, tp, q, n, q, q, K, q, q, q, K, tp, q, K, tp, n, tp)
     return O
@@ -59,14 +62,17 @@ def _osu_r(n: str, q: str, K: str, tp: str):
         _ret = []
         for k in d['{}']:
             _lr = len(_ret)
+            e: Exception = ValueError('')
             try:
                 _ret.append(convert_to_Reference(k))
             except:
                 try:
                     _ret.append(convert_to_{}(k))
-                except: pass
+                except Exception as ee:
+                    e = ee
             if _lr == len(_ret):
-                raise ValueError('{} in {} has a value %s which cannot be cast to Union[{}, Reference].' % str(k))
+                #raise ValueError('%s\\n{} in {} has a value %s which cannot be cast to Union[{}, Reference].' % (str(e), str(k)))
+                raise e
         {} = cast(Sequence[Union[{}, Reference]], _ret)
 '''.format(n, tp, q, n, q, q, K, q, q, tp, q, K, tp, n, tp)
     return O
@@ -82,24 +88,39 @@ def _ousu_r_r(n: str, q: str, K: str, tp: str):
         except:
             try:
                 {} = convert_to_{}(d['{}'])
-            except:
-                raise ValueError('{} in {} cannot be cast to Union[{}, Reference].')
+            except Exception as e:
+                #raise ValueError('%s\\n{} in {} cannot be cast to Union[{}, Reference].' % str(e))
+                raise e
     else:
         _ret = []
         for k in d['{}']:
             _lr = len(_ret)
+            e: Exception = ValueError('')
             try:
                 _ret.append(convert_to_Reference(k))
             except:
                 try:
                     _ret.append(convert_to_{}(k))
-                except: pass
+                except Exception as ee:
+                    e = ee
             if _lr == len(_ret):
-                raise ValueError('{} in {} has a value %s which cannot be cast to Union[{}, Reference].' % str(k))
+                # raise ValueError('%s\\n{} in {} has a value %s which cannot be cast to Union[{}, Reference].' % (str(e), str(k)))
+                raise e
         {} = cast(Sequence[Union[{}, Reference]], _ret)
 '''.format(n, tp, tp, q, n, q, n, q, n, tp, q, q, K, tp, q, K, q, q, tp, q, K, tp, n, tp)
     return O
 
+# Optional[Union[bool, int]]
+def oubi(n, q, K):
+    O = '''    {}: Optional[Union[bool, int]]
+    if '{}' not in d:
+        {} = None
+    elif (not isinstance(d['{}'], bool)) and (not isinstance(d['{}'], int)):
+        raise ValueError('{} must be of type `bool` or `int` in {}, instead got %s' % str(type(d['{}'])))
+    else:
+        {} = cast(Union[bool, int], d['{}'])
+'''.format(n, q, n, q, q, q, K, q, n, q)
+    return O
 
 # Optional[Union[Schema, Reference]]
 def _ou_r(n: str, q: str, K: str, tp: str):
@@ -114,8 +135,9 @@ def _ou_r(n: str, q: str, K: str, tp: str):
         except:
             try:
                 {} = convert_to_{}(d['{}'])
-            except:
-                raise ValueError('{} in {} has a value %s which cannot be cast to Union[{}, Reference].')
+            except Exception as e:
+                # raise ValueError('%s\\n{} in {} has a value %s which cannot be cast to Union[{}, Reference].' % str(e))
+                raise e
 '''.format(n, tp, q, n, q, q, K, q, n, q, n, tp, q, q, K, tp)
     return O
 
@@ -149,13 +171,16 @@ def _oms_r(n: str, q: str, K: str, tp: str):
     else:
         _ret = dict()
         for k, v in d['{}'].items():
+            e: Exception = ValueError('')
             if type(k) != str:
                 raise ValueError('{} in {} can only have string keys, but encountered %s.' % k)
             try:
                 _ret[k] = convert_to_{}(v)
-            except: pass
+            except Exception as ee:
+                e = ee
             if k not in _ret:
-                raise ValueError('{} in {} at key %s has a value %s which cannot be cast to {}.' % (k, str(v)))
+                #raise ValueError('%s\\n{} in {} at key %s has a value %s which cannot be cast to {}.' % (str(e), k, str(v)))
+                raise e
         {} = cast(Mapping[str, {}], _ret)
 '''.format(n, tp, q, n, q, q, K, q, q, q, K, tp, q, K, tp, n, tp)
     return O
@@ -170,13 +195,16 @@ def _ms_r(n: str, q: str, K: str, tp: str):
     else:
         _ret = dict()
         for k, v in d['{}'].items():
+            e: Exception = ValueError('')
             if type(k) != str:
                 raise ValueError('{} in {} can only have string keys, but encountered %s.' % k)
             try:
                 _ret[k] = convert_to_{}(v)
-            except: pass
+            except Exception as ee:
+                e = ee
             if k not in _ret:
-                raise ValueError('{} in {} at key %s has a value %s which cannot be cast to {}.' % (k, str(v)))
+                #raise ValueError('%s {} in {} at key %s has a value %s which cannot be cast to {}.' % (str(e), k, str(v)))
+                raise e
         {} = cast(Mapping[str, {}], _ret)
 '''.format(n, tp, q, q, K, q, q, K, q, q, q, K, tp, q, K, tp, n, tp)
     return O
@@ -193,8 +221,9 @@ def _oss_r(n: str, q: str, K: str, tp: str):
         for k in d['{}']:
             try:
                 _ret.append(convert_to_{}(k))
-            except:
-                raise ValueError('{} in {} has a value %s which cannot be cast to {}.' % str(k))
+            except Exception as e:
+                #raise ValueError('%s\\n{} in {} has a value %s which cannot be cast to {}.' % (str(e), str(k)))
+                raise e
         {} = cast(Sequence[{}], _ret)
 '''.format(n, tp, q, n, q, q, K, q, q, tp, q, K, tp, n, tp)
     return O
@@ -206,8 +235,9 @@ def _kls(n: str, q: str, K: str, tp: str):
         raise ValueError('{} must be defined for {}')
     try:
         {} = convert_to_{}(d['{}'])
-    except:
-        raise ValueError('{} must be of type `{}` in {}, instead got %s' % str(type(d['{}'])))
+    except Exception as e:
+        #raise ValueError('%s\\n{} must be of type `{}` in {}, instead got %s' % (str(e), str(type(d['{}']))))
+        raise e
 '''.format(n, tp, q, q, K, n, tp, q, q, tp, K, q)
     return O
 
@@ -219,8 +249,9 @@ def _kls_o(n: str, q: str, K: str, tp: str):
     else:
         try:
             {} = convert_to_{}(d['{}'])
-        except:
-            raise ValueError('{} must be of type `{}` in {}, instead got %s' % str(type(d['{}'])))
+        except Exception as e:
+            #raise ValueError('%s\\n{} must be of type `{}` in {}, instead got %s' % (str(e), str(type(d['{}']))))
+            raise e
 '''.format(n, tp, q, n, n, tp, q, q, tp, K, q)
     return O
 
@@ -446,7 +477,8 @@ _CONVERTERS = {
     'Info': _Info,
     'ImplicitOAuthFlow': _ImplicitOAuthFlow,
     'Mapping[str, str]': mstr,
-    'Mapping[str, MediaType]': msmr
+    'Mapping[str, MediaType]': msmr,
+    'Optional[Union[bool, int]]': oubi
 }
 
 with open('openapi_typed_2/openapi.py', 'r') as oai:
@@ -481,16 +513,18 @@ def convert_to_Responses(d: Any) -> Responses:
     else:
         _ret = dict()
         for k, v in d.items():
+            e: Exception = ValueError('')
             if type(k) != str:
                 raise ValueError('obj can only have string keys, but encountered %s.' % k)
             try:
-                _ret[k] = convert_to_Response(v)
+                _ret[k] = convert_to_Reference(v)
             except:
                 try:
-                    _ret[k] = convert_to_Reference(v)
-                except: pass
+                    _ret[k] = convert_to_Response(v)
+                except Exception as ee:
+                    e = ee
             if k not in _ret:
-                raise ValueError('Key %s has a value %s which cannot be cast to Union[Response, Reference].' % (k, str(v)))
+                raise e #ValueError('%s\\nKey %s has a value %s which cannot be cast to Union[Response, Reference].' % (str(e), k, str(v)))
         responses = cast(Responses, _ret)
     return responses
 
@@ -505,8 +539,8 @@ def convert_to_Callback(d: Any) -> Callback:
                 raise ValueError('obj can only have string keys, but encountered %s.' % k)
             try:
                 _ret[k] = convert_to_PathItem(v)
-            except:
-                raise ValueError('Key %s has a value %s which cannot be cast to PathItem.' % (k, str(v)))
+            except Exception as e:
+                raise ValueError('%s\\nKey %s has a value %s which cannot be cast to PathItem.' % (str(e), k, str(v)))
         callback = cast(Callback, _ret)
     return callback
 
@@ -521,8 +555,8 @@ def convert_to_Paths(d: Any) -> Paths:
                 raise ValueError('obj can only have string keys, but encountered %s.' % k)
             try:
                 _ret[k] = convert_to_PathItem(v)
-            except:
-                raise ValueError('Key %s has a value %s which cannot be cast to PathItem.' % (k, str(v)))
+            except Exception as e:
+                raise ValueError('%s\\nKey %s has a value %s which cannot be cast to PathItem.' % (str(e), k, str(v)))
         paths = cast(Paths, _ret)
     return paths
 

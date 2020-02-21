@@ -261,9 +261,7 @@ meow = {
 }
 
 
-def test_schema():
-    import json
-    from dataclasses import asdict
+def test_petstore_schema():
     o = convert_to_openapi(meow)
     parameter = o.paths['/pets'].get.parameters[0]
     assert isinstance(parameter, Parameter) and (parameter._in == 'query')
