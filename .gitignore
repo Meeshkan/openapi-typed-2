@@ -1,0 +1,10 @@
+.pytest_cache
+.venv
+.vscode
+**/__pycache__
+*.egg-info/
+.python-version
+build/
+dist/
+openapi_typed_2/converters.py
+.mypy_cache/
