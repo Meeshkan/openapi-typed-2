@@ -20,7 +20,7 @@ jobs:
           pip install -e '.[dev]'
       - name: Run type-checks
         run: |
-          mypy openapi_typed
+          mypy openapi_typed_2
       - name: Code gen
         run: /
           python gen.py
