@@ -24,6 +24,10 @@ jobs: # A basic unit of work in a run
             - "/usr/local/bin"
             - "/usr/local/lib/python3.6/site-packages"
       - run:
+          name: "Generate code"
+          command: |
+            pipenv run python setup.py gen
+      - run:
           name: "Run tests"
           command: |
             pipenv run python setup.py test
