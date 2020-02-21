@@ -228,7 +228,7 @@ def _oss_r(n: str, q: str, K: str, tp: str):
 '''.format(n, tp, q, n, q, q, K, q, q, tp, q, K, tp, n, tp)
     return O
 
-# AuthorizationCodeOAuthFlow
+# Schema
 def _kls(n: str, q: str, K: str, tp: str):
     O = '''    {}: {}
     if '{}' not in d:
@@ -256,23 +256,23 @@ def _kls_o(n: str, q: str, K: str, tp: str):
     return O
 
 
-def _AuthorizationCodeOAuthFlow(n, q, K):
-    return _kls(n, q, K, 'AuthorizationCodeOAuthFlow')
-
 def _Paths(n, q, K):
     return _kls(n, q, K, 'Paths')
 
 def _Info(n, q, K):
     return _kls(n, q, K, 'Info')
 
-def _ImplicitOAuthFlow(n, q, K):
-    return _kls(n, q, K, 'ImplicitOAuthFlow')
+def __AuthorizationCodeOAuthFlow(n, q, K):
+    return _kls_o(n, q, K, 'AuthorizationCodeOAuthFlow')
 
-def _PasswordOAuthFlow(n, q, K):
-    return _kls(n, q, K, 'PasswordOAuthFlow')
+def __ImplicitOAuthFlow(n, q, K):
+    return _kls_o(n, q, K, 'ImplicitOAuthFlow')
 
-def _ClientCredentialsFlow(n, q, K):
-    return _kls(n, q, K, 'ClientCredentialsFlow')
+def __PasswordOAuthFlow(n, q, K):
+    return _kls_o(n, q, K, 'PasswordOAuthFlow')
+
+def __ClientCredentialsFlow(n, q, K):
+    return _kls_o(n, q, K, 'ClientCredentialsFlow')
 
 def _OAuthFlows(n, q, K):
     return _kls(n, q, K, 'OAuthFlows')
@@ -426,7 +426,7 @@ _CONVERTERS = {
     'str': sstr,
     'int': sint,
     'bool': sbool,
-    'AuthorizationCodeOAuthFlow': _AuthorizationCodeOAuthFlow,
+    'Optional[AuthorizationCodeOAuthFlow]': __AuthorizationCodeOAuthFlow,
     'Responses': _Responses,
     'OAuthFlows': _OAuthFlows,
     'Optional[float]': sfloato,
@@ -435,7 +435,7 @@ _CONVERTERS = {
     'Optional[bool]': sboolo,
     'Optional[License]': __License,
     'Optional[Operation]': __Operation,
-    'PasswordOAuthFlow': _PasswordOAuthFlow,
+    'Optional[PasswordOAuthFlow]': __PasswordOAuthFlow,
     'Optional[Contact]': __Contact,
     'Optional[Components]': __Components,
     'Optional[Any]': __Any,
@@ -471,11 +471,11 @@ _CONVERTERS = {
     'Paths': _Paths,
     'Optional[Server]': __Server,
     'Optional[XML]': __XML,
-    'ClientCredentialsFlow': _ClientCredentialsFlow,
+    'Optional[ClientCredentialsFlow]': __ClientCredentialsFlow,
     'Schema': _Schema,
     'Reference': _Reference,
     'Info': _Info,
-    'ImplicitOAuthFlow': _ImplicitOAuthFlow,
+    'Optional[ImplicitOAuthFlow]': __ImplicitOAuthFlow,
     'Mapping[str, str]': mstr,
     'Mapping[str, MediaType]': msmr,
     'Optional[Union[bool, int]]': oubi
@@ -622,7 +622,8 @@ def convert_to_Any(d: Any) -> Any:
             name = o[0].strip()
             _type = o[1].split('#')[0].replace("'","").strip()
             props.append(name)
-            OUT += _CONVERTERS[_type](name, _TO_DICT_SUBS.get(name, name), curr)
+            if name != '_x':
+                OUT += _CONVERTERS[_type](name, _TO_DICT_SUBS.get(name, name), curr)
         if ('class ' in x) and (':' in x):
             curr = x.split(' ')[1].split(':')[0]
             inclass = True

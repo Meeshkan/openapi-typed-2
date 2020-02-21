@@ -38,11 +38,11 @@ class Schema:
   maxLength: Optional[int]
   minLength: Optional[int]
   pattern: Optional[str]
-  maxItems: Optional[float]
-  minItems: Optional[float]
+  maxItems: Optional[int]
+  minItems: Optional[int]
   uniqueItems: Optional[bool]
-  maxProperties: Optional[float]
-  minProperties: Optional[float]
+  maxProperties: Optional[int]
+  minProperties: Optional[int]
   required: Optional[Sequence[str]]
   enum: Optional[Sequence[Any]]
   allOf: Optional[Sequence[Union['Schema', Reference]]]  # type: Optional[ignore
@@ -249,10 +249,10 @@ class AuthorizationCodeOAuthFlow:
 
 @dataclass
 class OAuthFlows:
-  implicit: ImplicitOAuthFlow
-  password: PasswordOAuthFlow
-  clientCredentials: ClientCredentialsFlow
-  authorizationCode: AuthorizationCodeOAuthFlow
+  implicit: Optional[ImplicitOAuthFlow]
+  password: Optional[PasswordOAuthFlow]
+  clientCredentials: Optional[ClientCredentialsFlow]
+  authorizationCode: Optional[AuthorizationCodeOAuthFlow]
   _x: Optional[Mapping[str, Any]]
 
 @dataclass
