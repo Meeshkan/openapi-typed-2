@@ -45,6 +45,13 @@ Install development dependencies:
 pip install -e '.[dev]'
 ```
 
+Do codegen (necessary for type checking and tests):
+
+```bash
+python setup.py gen
+```
+
+
 Run tests:
 
 ```bash
