@@ -27,7 +27,8 @@ DEV = [
     'setuptools',
     'twine',
     'wheel',
-    'typeguard'
+    'typeguard',
+    'mypy'
 ]
 
 VERSION = '0.0.0'
@@ -75,8 +76,11 @@ class BuildDistCommand(SetupCommand):
 
 
 def type_check():
-    return os.system("pyright --lib")
-
+    tc0 = os.system("pyright --lib")
+    tc1 = os.system("mypy -m openapi_typed_2")
+    # As 0 is "good" and anything higher is "bad", return
+    # bad if bad exists.
+    return max([tc0, tc1])
 
 class TypeCheckCommand(SetupCommand):
     """Run type-checking."""
