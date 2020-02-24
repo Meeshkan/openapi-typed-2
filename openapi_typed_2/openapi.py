@@ -45,12 +45,12 @@ class Schema:
   minProperties: Optional[int]
   required: Optional[Sequence[str]]
   enum: Optional[Sequence[Any]]
-  allOf: Optional[Sequence[Union['Schema', Reference]]]  # type: Optional[ignore
-  oneOf: Optional[Sequence[Union['Schema', Reference]]]  # type: Optional[ignore
-  anyOf: Optional[Sequence[Union['Schema', Reference]]]  # type: Optional[ignore
-  items: Optional[Union[Sequence[Union['Schema', Reference]], 'Schema', Reference]]  # type: Optional[ignore
-  properties: Optional[Mapping[str, Union['Schema', Reference]]]  # type: Optional[ignore
-  additionalProperties: Optional[Union['Schema', Reference, bool]]  # type: Optional[ignore
+  allOf: Optional[Sequence[Union['Schema', Reference]]]
+  oneOf: Optional[Sequence[Union['Schema', Reference]]]
+  anyOf: Optional[Sequence[Union['Schema', Reference]]]
+  items: Optional[Union[Sequence[Union['Schema', Reference]], 'Schema', Reference]]
+  properties: Optional[Mapping[str, Union['Schema', Reference]]]
+  additionalProperties: Optional[Union['Schema', Reference, bool]]
   description: Optional[str]
   default: Optional[Any]
   nullable: Optional[bool]
@@ -125,7 +125,7 @@ class Example:
 @dataclass
 class Encoding:
   contentType: Optional[str]
-  headers: Optional[Mapping[str, 'Header']]  # type: ignore
+  headers: Optional[Mapping[str, 'Header']]
   style: Optional[str]
   explode: Optional[bool]
   allowReserved: Optional[bool]
@@ -156,15 +156,15 @@ class Header:
 
 @dataclass
 class Operation:
-  responses: 'Responses'  # type: ignore
+  responses: 'Responses'
   tags: Optional[Sequence[str]]
   summary: Optional[str]
   description: Optional[str]
   externalDocs: Optional[ExternalDocumentation]
   operationId: Optional[str]
-  parameters: Optional[Sequence[Union['Parameter', Reference]]]  # type: ignore
-  requestBody: Optional[Union['RequestBody', Reference]]  # type: ignore
-  callbacks: Optional[Mapping[str, Union['Callback', Reference]]]  # type: ignore
+  parameters: Optional[Sequence[Union['Parameter', Reference]]]
+  requestBody: Optional[Union['RequestBody', Reference]]
+  callbacks: Optional[Mapping[str, Union['Callback', Reference]]]
   deprecated: Optional[bool]
   security: Optional[Sequence['SecurityRequirement']]
   servers: Optional[Sequence[Server]]
@@ -271,7 +271,7 @@ class OpenIdConnectSecurityScheme:
 
 SecurityScheme = Union[APIKeySecurityScheme, HTTPSecurityScheme, OAuth2SecurityScheme, OpenIdConnectSecurityScheme, str]
 
-Responses = Mapping[str, Union[Response, Reference]]  # type: ignore
+Responses = Mapping[str, Union[Response, Reference]]
 SecurityRequirement = Mapping[str, Sequence[str]]
 
 @dataclass
@@ -291,7 +291,7 @@ class PathItem:
   _ref: Optional[str]
   _x: Optional[Mapping[str, Any]]
 
-Callback = Mapping[str, PathItem]  # type: ignore
+Callback = Mapping[str, PathItem]
 
 @dataclass
 class Components:
@@ -306,7 +306,7 @@ class Components:
   callbacks: Optional[Mapping[str, Union[Callback, Reference]]]
   _x: Optional[Mapping[str, Any]]
 
-Paths = Mapping[str, PathItem]  # type: ignore
+Paths = Mapping[str, PathItem]
 
 @dataclass
 class Tag:
