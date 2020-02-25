@@ -485,7 +485,7 @@ with open('openapi_typed_2/openapi.py', 'r') as oai:
     OAI = oai.read()
     fl = [x for x in OAI.replace('@dataclass\n','').split('class')[1:]]
     fl = [[y for y in x.split('\n') if y not in ['@data', '']] for x in fl]
-    types = list(set([q.replace("'", "") for q in sum([[y.split(':')[1].split('#')[0].strip() for y in x if ':' in y] for x in fl], []) if q not in ['', 'ignore']]))
+    types = list(set([q.replace("'", "") for q in sum([[y.split(':')[1].split('#')[0].split('=')[0].strip() for y in x if ':' in y] for x in fl], []) if q not in ['', 'ignore']]))
     uc = [x for x in types if x not in _CONVERTERS]
     OUT = '''from typing import cast, Sequence, Union, Any, Mapping, Optional
 from .openapi import *
@@ -620,7 +620,7 @@ def convert_to_Any(d: Any) -> Any:
         if inclass:
             o = x.split(':')
             name = o[0].strip()
-            _type = o[1].split('#')[0].replace("'","").strip()
+            _type = o[1].split('#')[0].split('=')[0].replace("'","").strip()
             props.append(name)
             if name != '_x':
                 OUT += _CONVERTERS[_type](name, _TO_DICT_SUBS.get(name, name), curr)

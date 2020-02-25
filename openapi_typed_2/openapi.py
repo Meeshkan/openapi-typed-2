@@ -1,328 +1,328 @@
 from typing import Sequence, Union, Any, Mapping, Optional
 from dataclasses import dataclass
 
-@dataclass
+@dataclass(frozen=True)
 class Discriminator:
   propertyName: str
-  mapping: Optional[Mapping[str, str]]
-  _x: Optional[Mapping[str, Any]]
+  mapping: Optional[Mapping[str, str]] = None
+  _x: Optional[Mapping[str, Any]] = None
 
-@dataclass
+@dataclass(frozen=True)
 class ExternalDocumentation:
   url: str
-  description: Optional[str]
-  _x: Optional[Mapping[str, Any]]
+  description: Optional[str] = None
+  _x: Optional[Mapping[str, Any]] = None
 
-@dataclass
+@dataclass(frozen=True)
 class XML:
-  name: Optional[str]
-  namespace: Optional[str]
-  prefix: Optional[str]
-  attribute: Optional[bool]
-  wrapped: Optional[bool]
-  _x: Optional[Mapping[str, Any]]
+  name: Optional[str] = None
+  namespace: Optional[str] = None
+  prefix: Optional[str] = None
+  attribute: Optional[bool] = None
+  wrapped: Optional[bool] = None
+  _x: Optional[Mapping[str, Any]] = None
 
-@dataclass
+@dataclass(frozen=True)
 class Reference:
   _ref: str
-  _x: Optional[Mapping[str, Any]]
+  _x: Optional[Mapping[str, Any]] = None
 
-@dataclass
+@dataclass(frozen=True)
 class Schema:
-  title: Optional[str]
-  multipleOf: Optional[float]
-  maximum: Optional[float]
-  exclusiveMaximum: Optional[Union[bool, int]]
-  minimum: Optional[float]
-  exclusiveMinimum: Optional[Union[bool, int]]
-  maxLength: Optional[int]
-  minLength: Optional[int]
-  pattern: Optional[str]
-  maxItems: Optional[int]
-  minItems: Optional[int]
-  uniqueItems: Optional[bool]
-  maxProperties: Optional[int]
-  minProperties: Optional[int]
-  required: Optional[Sequence[str]]
-  enum: Optional[Sequence[Any]]
-  allOf: Optional[Sequence[Union['Schema', Reference]]]
-  oneOf: Optional[Sequence[Union['Schema', Reference]]]
-  anyOf: Optional[Sequence[Union['Schema', Reference]]]
-  items: Optional[Union[Sequence[Union['Schema', Reference]], 'Schema', Reference]]
-  properties: Optional[Mapping[str, Union['Schema', Reference]]]
-  additionalProperties: Optional[Union['Schema', Reference, bool]]
-  description: Optional[str]
-  default: Optional[Any]
-  nullable: Optional[bool]
-  discriminator: Optional[Discriminator]
-  readOnly: Optional[bool]
-  writeOnly: Optional[bool]
-  example: Optional[Any]
-  externalDocs: Optional[ExternalDocumentation]
-  deprecated: Optional[bool]
-  xml: Optional[XML]
-  _format: Optional[str]
-  _type: Optional[str]
-  _not: Optional[Union['Schema', Reference]]
+  title: Optional[str] = None
+  multipleOf: Optional[float] = None
+  maximum: Optional[float] = None
+  exclusiveMaximum: Optional[Union[bool, int]] = None
+  minimum: Optional[float] = None
+  exclusiveMinimum: Optional[Union[bool, int]] = None
+  maxLength: Optional[int] = None
+  minLength: Optional[int] = None
+  pattern: Optional[str] = None
+  maxItems: Optional[int] = None
+  minItems: Optional[int] = None
+  uniqueItems: Optional[bool] = None
+  maxProperties: Optional[int] = None
+  minProperties: Optional[int] = None
+  required: Optional[Sequence[str]] = None
+  enum: Optional[Sequence[Any]] = None
+  allOf: Optional[Sequence[Union['Schema', Reference]]] = None
+  oneOf: Optional[Sequence[Union['Schema', Reference]]] = None
+  anyOf: Optional[Sequence[Union['Schema', Reference]]] = None
+  items: Optional[Union[Sequence[Union['Schema', Reference]], 'Schema', Reference]] = None
+  properties: Optional[Mapping[str, Union['Schema', Reference]]] = None
+  additionalProperties: Optional[Union['Schema', Reference, bool]] = None
+  description: Optional[str] = None
+  default: Optional[Any] = None
+  nullable: Optional[bool] = None
+  discriminator: Optional[Discriminator] = None
+  readOnly: Optional[bool] = None
+  writeOnly: Optional[bool] = None
+  example: Optional[Any] = None
+  externalDocs: Optional[ExternalDocumentation] = None
+  deprecated: Optional[bool] = None
+  xml: Optional[XML] = None
+  _format: Optional[str] = None
+  _type: Optional[str] = None
+  _not: Optional[Union['Schema', Reference]] = None
 
-  _x: Optional[Mapping[str, Any]]
+  _x: Optional[Mapping[str, Any]] = None
 
-@dataclass
+@dataclass(frozen=True)
 class Contact:
-  name: Optional[str]
-  url: Optional[str]
-  email: Optional[str]
-  _x: Optional[Mapping[str, Any]]
+  name: Optional[str] = None
+  url: Optional[str] = None
+  email: Optional[str] = None
+  _x: Optional[Mapping[str, Any]] = None
 
-@dataclass
+@dataclass(frozen=True)
 class License:
   name: str
-  url: Optional[str]
-  _x: Optional[Mapping[str, Any]]
+  url: Optional[str] = None
+  _x: Optional[Mapping[str, Any]] = None
 
-@dataclass
+@dataclass(frozen=True)
 class Info:
   title: str
   version: str
-  description: Optional[str]
-  termsOfService: Optional[str]
-  contact: Optional[Contact]
-  _license: Optional[License]
-  _x: Optional[Mapping[str, Any]]
+  description: Optional[str] = None
+  termsOfService: Optional[str] = None
+  contact: Optional[Contact] = None
+  _license: Optional[License] = None
+  _x: Optional[Mapping[str, Any]] = None
 
-@dataclass
+@dataclass(frozen=True)
 class ServerVariable:
-  enum: Optional[Sequence[str]]
-  description: Optional[str]
   _default: str
-  _x: Optional[Mapping[str, Any]]
+  enum: Optional[Sequence[str]] = None
+  description: Optional[str] = None
+  _x: Optional[Mapping[str, Any]] = None
 
-@dataclass
+@dataclass(frozen=True)
 class Server:
   url: str
-  description: Optional[str]
-  variables: Optional[Mapping[str, ServerVariable]]
-  _x: Optional[Mapping[str, Any]]
+  description: Optional[str] = None
+  variables: Optional[Mapping[str, ServerVariable]] = None
+  _x: Optional[Mapping[str, Any]] = None
 
-@dataclass
+@dataclass(frozen=True)
 class Link:
-  operationId: Optional[str]
-  operationRef: Optional[str]
-  parameters: Optional[Mapping[str, Any]]
-  requestBody: Optional[Any]
-  description: Optional[str]
-  server: Optional[Server]
-  _x: Optional[Mapping[str, Any]]
+  operationId: Optional[str] = None
+  operationRef: Optional[str] = None
+  parameters: Optional[Mapping[str, Any]] = None
+  requestBody: Optional[Any] = None
+  description: Optional[str] = None
+  server: Optional[Server] = None
+  _x: Optional[Mapping[str, Any]] = None
 
-@dataclass
+@dataclass(frozen=True)
 class Example:
-  summary: Optional[str]
-  description: Optional[str]
-  value: Optional[Any]
-  externalValue: Optional[str]
-  _x: Optional[Mapping[str, Any]]
+  summary: Optional[str] = None
+  description: Optional[str] = None
+  value: Optional[Any] = None
+  externalValue: Optional[str] = None
+  _x: Optional[Mapping[str, Any]] = None
 
-@dataclass
+@dataclass(frozen=True)
 class Encoding:
-  contentType: Optional[str]
-  headers: Optional[Mapping[str, 'Header']]
-  style: Optional[str]
-  explode: Optional[bool]
-  allowReserved: Optional[bool]
-  _x: Optional[Mapping[str, Any]]
+  contentType: Optional[str] = None
+  headers: Optional[Mapping[str, 'Header']] = None
+  style: Optional[str] = None
+  explode: Optional[bool] = None
+  allowReserved: Optional[bool] = None
+  _x: Optional[Mapping[str, Any]] = None
 
-@dataclass
+@dataclass(frozen=True)
 class MediaType:
-  schema: Optional[Union[Schema, Reference]]
-  example: Optional[Any]
-  examples: Optional[Mapping[str, Union[Example, Reference]]]
-  encoding: Optional[Mapping[str, Encoding]]
-  _x: Optional[Mapping[str, Any]]
+  schema: Optional[Union[Schema, Reference]] = None
+  example: Optional[Any] = None
+  examples: Optional[Mapping[str, Union[Example, Reference]]] = None
+  encoding: Optional[Mapping[str, Encoding]] = None
+  _x: Optional[Mapping[str, Any]] = None
 
-@dataclass
+@dataclass(frozen=True)
 class Header:
-  description: Optional[str]
-  required: Optional[bool]
-  deprecated: Optional[bool]
-  allowEmptyValue: Optional[bool]
-  style: Optional[str]
-  explode: Optional[bool]
-  allowReserved: Optional[bool]
-  schema: Optional[Union[Schema, Reference]]
-  content: Optional[Mapping[str, MediaType]]
-  example: Optional[Any]
-  examples: Optional[Mapping[str, Union[Example, Reference]]]
-  _x: Optional[Mapping[str, Any]]
+  description: Optional[str] = None
+  required: Optional[bool] = None
+  deprecated: Optional[bool] = None
+  allowEmptyValue: Optional[bool] = None
+  style: Optional[str] = None
+  explode: Optional[bool] = None
+  allowReserved: Optional[bool] = None
+  schema: Optional[Union[Schema, Reference]] = None
+  content: Optional[Mapping[str, MediaType]] = None
+  example: Optional[Any] = None
+  examples: Optional[Mapping[str, Union[Example, Reference]]] = None
+  _x: Optional[Mapping[str, Any]] = None
 
-@dataclass
+@dataclass(frozen=True)
 class Operation:
   responses: 'Responses'
-  tags: Optional[Sequence[str]]
-  summary: Optional[str]
-  description: Optional[str]
-  externalDocs: Optional[ExternalDocumentation]
-  operationId: Optional[str]
-  parameters: Optional[Sequence[Union['Parameter', Reference]]]
-  requestBody: Optional[Union['RequestBody', Reference]]
-  callbacks: Optional[Mapping[str, Union['Callback', Reference]]]
-  deprecated: Optional[bool]
-  security: Optional[Sequence['SecurityRequirement']]
-  servers: Optional[Sequence[Server]]
-  _x: Optional[Mapping[str, Any]]
+  tags: Optional[Sequence[str]] = None
+  summary: Optional[str] = None
+  description: Optional[str] = None
+  externalDocs: Optional[ExternalDocumentation] = None
+  operationId: Optional[str] = None
+  parameters: Optional[Sequence[Union['Parameter', Reference]]] = None
+  requestBody: Optional[Union['RequestBody', Reference]] = None
+  callbacks: Optional[Mapping[str, Union['Callback', Reference]]] = None
+  deprecated: Optional[bool] = None
+  security: Optional[Sequence['SecurityRequirement']] = None
+  servers: Optional[Sequence[Server]] = None
+  _x: Optional[Mapping[str, Any]] = None
 
-@dataclass
+@dataclass(frozen=True)
 class Response:
   description: str
-  headers: Optional[Mapping[str, Union[Header, Reference]]]
-  content: Optional[Mapping[str, MediaType]]
-  links: Optional[Mapping[str, Union[Link, Reference]]]
-  _x: Optional[Mapping[str, Any]]
+  headers: Optional[Mapping[str, Union[Header, Reference]]] = None
+  content: Optional[Mapping[str, MediaType]] = None
+  links: Optional[Mapping[str, Union[Link, Reference]]] = None
+  _x: Optional[Mapping[str, Any]] = None
 
-@dataclass
+@dataclass(frozen=True)
 class Parameter:
   name: str
-  description: Optional[str]
-  required: Optional[bool]
-  deprecated: Optional[bool]
-  allowEmptyValue: Optional[bool]
-  style: Optional[str]
-  explode: Optional[bool]
-  allowReserved: Optional[bool]
-  schema: Optional[Union[Schema, Reference]]
-  content: Optional[Mapping[str, MediaType]]
-  example: Optional[Any]
-  examples: Optional[Mapping[str, Union[Example, Reference]]]
   _in: str
-  _x: Optional[Mapping[str, Any]]
+  description: Optional[str] = None
+  required: Optional[bool] = None
+  deprecated: Optional[bool] = None
+  allowEmptyValue: Optional[bool] = None
+  style: Optional[str] = None
+  explode: Optional[bool] = None
+  allowReserved: Optional[bool] = None
+  schema: Optional[Union[Schema, Reference]] = None
+  content: Optional[Mapping[str, MediaType]] = None
+  example: Optional[Any] = None
+  examples: Optional[Mapping[str, Union[Example, Reference]]] = None
+  _x: Optional[Mapping[str, Any]] = None
 
-@dataclass
+@dataclass(frozen=True)
 class RequestBody:
   content: Mapping[str, MediaType]
-  description: Optional[str]
-  required: Optional[bool]
-  _x: Optional[Mapping[str, Any]]
+  description: Optional[str] = None
+  required: Optional[bool] = None
+  _x: Optional[Mapping[str, Any]] = None
 
-@dataclass
+@dataclass(frozen=True)
 class APIKeySecurityScheme:
-  description: Optional[str]
   name: str
   _type: str
   _in: str
-  _x: Optional[Mapping[str, Any]]
+  description: Optional[str] = None
+  _x: Optional[Mapping[str, Any]] = None
 
-@dataclass
+@dataclass(frozen=True)
 class HTTPSecurityScheme:
-  scheme: str
-  bearerFormat: Optional[str]
-  description: Optional[str]
   _type: str
-  _x: Optional[Mapping[str, Any]]
+  scheme: str
+  bearerFormat: Optional[str] = None
+  description: Optional[str] = None
+  _x: Optional[Mapping[str, Any]] = None
 
-@dataclass
+@dataclass(frozen=True)
 class ImplicitOAuthFlow:
   authorizationUrl: str
   scopes: Mapping[str, str]
-  refreshUrl: Optional[str]
-  _x: Optional[Mapping[str, Any]]
+  refreshUrl: Optional[str] = None
+  _x: Optional[Mapping[str, Any]] = None
 
-@dataclass
+@dataclass(frozen=True)
 class PasswordOAuthFlow:
   tokenUrl: str
-  refreshUrl: Optional[str]
-  scopes: Optional[Mapping[str, str]]
-  _x: Optional[Mapping[str, Any]]
+  refreshUrl: Optional[str] = None
+  scopes: Optional[Mapping[str, str]] = None
+  _x: Optional[Mapping[str, Any]] = None
 
-@dataclass
+@dataclass(frozen=True)
 class ClientCredentialsFlow:
   tokenUrl: str
-  refreshUrl: Optional[str]
-  scopes: Optional[Mapping[str, str]]
-  _x: Optional[Mapping[str, Any]]
+  refreshUrl: Optional[str] = None
+  scopes: Optional[Mapping[str, str]] = None
+  _x: Optional[Mapping[str, Any]] = None
 
-@dataclass
+@dataclass(frozen=True)
 class AuthorizationCodeOAuthFlow:
   tokenUrl: str
   authorizationUrl: str
-  refreshUrl: Optional[str]
-  scopes: Optional[Mapping[str, str]]
-  _x: Optional[Mapping[str, Any]]
+  refreshUrl: Optional[str] = None
+  scopes: Optional[Mapping[str, str]] = None
+  _x: Optional[Mapping[str, Any]] = None
 
-@dataclass
+@dataclass(frozen=True)
 class OAuthFlows:
-  implicit: Optional[ImplicitOAuthFlow]
-  password: Optional[PasswordOAuthFlow]
-  clientCredentials: Optional[ClientCredentialsFlow]
-  authorizationCode: Optional[AuthorizationCodeOAuthFlow]
-  _x: Optional[Mapping[str, Any]]
+  implicit: Optional[ImplicitOAuthFlow] = None
+  password: Optional[PasswordOAuthFlow] = None
+  clientCredentials: Optional[ClientCredentialsFlow] = None
+  authorizationCode: Optional[AuthorizationCodeOAuthFlow] = None
+  _x: Optional[Mapping[str, Any]] = None
 
-@dataclass
+@dataclass(frozen=True)
 class OAuth2SecurityScheme:
   flows: OAuthFlows
-  description: Optional[str]
   _type: str
-  _x: Optional[Mapping[str, Any]]
+  description: Optional[str] = None
+  _x: Optional[Mapping[str, Any]] = None
 
-@dataclass
+@dataclass(frozen=True)
 class OpenIdConnectSecurityScheme:
-  openIdConnectUrl: str
-  description: Optional[str]
   _type: str
-  _x: Optional[Mapping[str, Any]]
+  openIdConnectUrl: str
+  description: Optional[str] = None
+  _x: Optional[Mapping[str, Any]] = None
 
 SecurityScheme = Union[APIKeySecurityScheme, HTTPSecurityScheme, OAuth2SecurityScheme, OpenIdConnectSecurityScheme, str]
 
 Responses = Mapping[str, Union[Response, Reference]]
 SecurityRequirement = Mapping[str, Sequence[str]]
 
-@dataclass
+@dataclass(frozen=True)
 class PathItem:
-  summary: Optional[str]
-  description: Optional[str]
-  servers: Optional[Sequence[Server]]
-  parameters: Optional[Sequence[Union[Parameter, Reference]]]
-  get: Optional[Operation]
-  put: Optional[Operation]
-  post: Optional[Operation]
-  delete: Optional[Operation]
-  options: Optional[Operation]
-  head: Optional[Operation]
-  patch: Optional[Operation]
-  trace: Optional[Operation]
-  _ref: Optional[str]
-  _x: Optional[Mapping[str, Any]]
+  summary: Optional[str] = None
+  description: Optional[str] = None
+  servers: Optional[Sequence[Server]] = None
+  parameters: Optional[Sequence[Union[Parameter, Reference]]] = None
+  get: Optional[Operation] = None
+  put: Optional[Operation] = None
+  post: Optional[Operation] = None
+  delete: Optional[Operation] = None
+  options: Optional[Operation] = None
+  head: Optional[Operation] = None
+  patch: Optional[Operation] = None
+  trace: Optional[Operation] = None
+  _ref: Optional[str] = None
+  _x: Optional[Mapping[str, Any]] = None
 
 Callback = Mapping[str, PathItem]
 
-@dataclass
+@dataclass(frozen=True)
 class Components:
-  schemas: Optional[Mapping[str, Union[Schema, Reference]]]
-  responses: Optional[Mapping[str, Union[Response, Reference]]]
-  parameters: Optional[Mapping[str, Union[Parameter, Reference]]]
-  examples: Optional[Mapping[str, Union[Example, Reference]]]
-  requestBodies: Optional[Mapping[str, Union[RequestBody, Reference]]]
-  headers: Optional[Mapping[str, Union[Header, Reference]]]
-  securitySchemes: Optional[Mapping[str, Union[SecurityScheme, Reference]]]
-  links: Optional[Mapping[str, Union[Link, Reference]]]
-  callbacks: Optional[Mapping[str, Union[Callback, Reference]]]
-  _x: Optional[Mapping[str, Any]]
+  schemas: Optional[Mapping[str, Union[Schema, Reference]]] = None
+  responses: Optional[Mapping[str, Union[Response, Reference]]] = None
+  parameters: Optional[Mapping[str, Union[Parameter, Reference]]] = None
+  examples: Optional[Mapping[str, Union[Example, Reference]]] = None
+  requestBodies: Optional[Mapping[str, Union[RequestBody, Reference]]] = None
+  headers: Optional[Mapping[str, Union[Header, Reference]]] = None
+  securitySchemes: Optional[Mapping[str, Union[SecurityScheme, Reference]]] = None
+  links: Optional[Mapping[str, Union[Link, Reference]]] = None
+  callbacks: Optional[Mapping[str, Union[Callback, Reference]]] = None
+  _x: Optional[Mapping[str, Any]] = None
 
 Paths = Mapping[str, PathItem]
 
-@dataclass
+@dataclass(frozen=True)
 class Tag:
   name: str
-  description: Optional[str]
-  externalDocs: Optional[ExternalDocumentation]
-  _x: Optional[Mapping[str, Any]]
+  description: Optional[str] = None
+  externalDocs: Optional[ExternalDocumentation] = None
+  _x: Optional[Mapping[str, Any]] = None
 
-@dataclass
+@dataclass(frozen=True)
 class OpenAPIObject:
   openapi: str
   info: Info
   paths: Paths
-  externalDocs: Optional[ExternalDocumentation]
-  servers: Optional[Sequence[Server]]
-  security: Optional[Sequence[SecurityRequirement]]
-  tags: Optional[Sequence[Tag]]
-  components: Optional[Components]
-  _x: Optional[Mapping[str, Any]]
+  externalDocs: Optional[ExternalDocumentation] = None
+  servers: Optional[Sequence[Server]] = None
+  security: Optional[Sequence[SecurityRequirement]] = None
+  tags: Optional[Sequence[Tag]] = None
+  components: Optional[Components] = None
+  _x: Optional[Mapping[str, Any]] = None
