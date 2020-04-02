@@ -37,7 +37,8 @@ meow = {
                         "schema": {
                             "type": "array",
                             "items": {
-                                "type": "string"
+                                "type": "float",
+                                "minimum": 0
                             }
                         }
                     },
