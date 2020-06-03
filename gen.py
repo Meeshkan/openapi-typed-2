@@ -1,27 +1,24 @@
-import openapi_typed_2
-from collections.abc import Sequence, Mapping
-
 _TO_DICT_SUBS = {'_license': 'license', '_format': 'format', '_in': 'in', '_ref': '$ref', '_not': 'not', '_type': 'type', '_default': 'default'}
 
-def _simple_prop(n: str, q: str, K: str, tp: str) -> str:
+def _simple_prop(n: str, q: str, K: str, tp: str, ctp: str) -> str:
     O = '''    {}: {}
     if '{}' not in d:
         raise ValueError('{} must be defined for {}')
-    if not isinstance(d['{}'], {}):
-        raise ValueError('{} must be of type `{}` in {}, instead got %s' % str(type(d['{}'])))
-    {} = cast({}, d['{}'])
-'''.format(n, tp, q, q, K, q, tp, q, tp, K, q, n, tp, q)
+    if not iscoerceable(d['{}'], {}):
+        raise ValueError('{} must be one of the following types `{}` in {}, instead got %s' % str(type(d['{}'])))
+    {} = cast({}, {}(d['{}']))
+'''.format(n, tp, q, q, K, q, ctp, q, ctp, K, q, n, tp, tp, q)
     return O
 
-def _simple_prop_opt(n: str, q: str, K: str, tp: str) -> str:
+def _simple_prop_opt(n: str, q: str, K: str, tp: str, ctp: str) -> str:
     O = '''    {}: Optional[{}]
     if '{}' not in d:
         {} = None
-    elif not isinstance(d['{}'], {}):
-        raise ValueError('{} must be of type `{}` in {}, instead got %s' % str(type(d['{}'])))
+    elif not iscoerceable(d['{}'], {}):
+        raise ValueError('{} must be one of the following types: `{}` in {}, instead got %s' % str(type(d['{}'])))
     else:
         {} = cast({}, d['{}'])
-'''.format(n, tp, q, n, q, tp, q, tp, K, q, n, tp, q)
+'''.format(n, tp, q, n, q, ctp, q, ctp, K, q, n, tp, q)
     return O
 
 # Optional[Mapping[str, Union[Link, Reference]]]
@@ -398,28 +395,28 @@ def osupr(n: str, q: str, K: str):
     return _osu_r(n, q, K, 'Parameter')
 
 def sstr(n: str, q: str, K: str) -> str:
-    return _simple_prop(n, q, K, 'str')
+    return _simple_prop(n, q, K, 'str', '[str]')
 
 def sint(n: str, q: str, K: str) -> str:
-    return _simple_prop(n, q, K, 'int')
+    return _simple_prop(n, q, K, 'int', '[int]')
 
 def sbool(n: str, q: str, K: str) -> str:
-    return _simple_prop(n, q, K, 'bool')
+    return _simple_prop(n, q, K, 'bool', '[bool]')
 
 def sfloat(n: str, q: str, K: str) -> str:
-    return _simple_prop(n, q, K, 'float')
+    return _simple_prop(n, q, K, 'float', '[float, int]')
 
 def sstro(n: str, q: str, K: str) -> str:
-    return _simple_prop_opt(n, q, K, 'str')
+    return _simple_prop_opt(n, q, K, 'str', '[str]')
 
 def sinto(n: str, q: str, K: str) -> str:
-    return _simple_prop_opt(n, q, K, 'int')
+    return _simple_prop_opt(n, q, K, 'int', '[int]')
 
 def sboolo(n: str, q: str, K: str) -> str:
-    return _simple_prop_opt(n, q, K, 'bool')
+    return _simple_prop_opt(n, q, K, 'bool', '[bool]')
 
 def sfloato(n: str, q: str, K: str) -> str:
-    return _simple_prop_opt(n, q, K, 'float')
+    return _simple_prop_opt(n, q, K, 'float', '[float, int]')
 
 _CONVERTERS = {
     'float': sfloat,
@@ -492,6 +489,9 @@ from .openapi import *
 from dataclasses import is_dataclass, fields
 
 _TO_DICT_SUBS = {'_license': 'license', '_format': 'format', '_in': 'in', '_ref': '$ref', '_not': 'not', '_type': 'type', '_default': 'default'}
+
+def iscoerceable(i: any, lt: Sequence[type]) -> bool:
+    return True in [isinstance(i, x) for x in lt]
 
 def convert_to_str(d: Any) -> str:
     if not isinstance(d, str):
