@@ -30,7 +30,7 @@ DEV = [
     'mypy'
 ]
 
-VERSION = '0.0.4'
+VERSION = '0.0.5'
 
 # Optional packages
 EXTRAS = {'dev': DEV}
